@@ -50,6 +50,8 @@ console.log(`---------- BINARY TREE -----------`);
 
 const binaryTree = new BTree.BinaryTree();
 
+console.log(`tree elements: {a: 1, b: 2, c: 3, d: 4, e: 5}`);
+
 binaryTree.insert({key: 'a', value: 1});
 binaryTree.insert({key: 'b', value: 2});
 binaryTree.insert({key: 'c', value: 3});
