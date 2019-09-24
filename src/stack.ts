@@ -12,14 +12,14 @@ class Stack<T>{
   }
 
   public pop() {
-    const tail = this.list.getTail;
+    const tail = this.list.tail;
 
     if (tail) {
       const node = tail.prev;
 
       if(node) {
         node.next = null;
-        this.list.setTail = node;
+        this.list.tail = node;
         return node.value;
       }
     }

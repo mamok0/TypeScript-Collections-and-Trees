@@ -1,13 +1,12 @@
-import * as List from './linkedList';
+import LinkedList from './linkedList';
 import Stack from './stack';
 import Queue from './queue';
-import CustomTree from './customTree';
-import BTree from './binaryTreeStrategy';
-import { basename } from 'path';
+import CustomLeavesAmountTree from './customTree';
+import * as BTree from './binaryTreeStrategy';
 
 console.log(`---------- LIST -----------`);
 
-const list = new List.LinkedList([1, 2, 3]);
+const list = new LinkedList([1, 2, 3]);
 console.log(`length: ${list.length()}`);
 console.log(`array: ${list.toArray()}`);
 list.append(4);
@@ -38,7 +37,7 @@ console.log(`length: ${queue.length()}`);
 
 console.log(`---------- CUSTOM TREE -----------`);
 
-const customTree = new CustomTree<number>(3);
+const customTree = new CustomLeavesAmountTree<number>(3);
 customTree.insert(1);
 customTree.insert(2);
 customTree.insert(3);
@@ -56,17 +55,6 @@ binaryTree.insert({key: 'c', value: 3});
 binaryTree.insert({key: 'd', value: 4});
 binaryTree.insert({key: 'e', value: 5});
 
-const inOrder = new BTree.InOrderSearch();
-const preOrder = new BTree.PreOrderSearch();
-const postOrder = new BTree.PostOrderSearch();
-
-binaryTree.getAlgorythm = inOrder;
-console.log(`inOrder: c = ${binaryTree.search('c', binaryTree.root)}`);
-
-binaryTree.getAlgorythm = preOrder;
-console.log(`preOrder: e = ${binaryTree.search('e', binaryTree.root)}`);
-
-binaryTree.getAlgorythm = postOrder;
 console.log(`preOrder: b = ${binaryTree.search('b', binaryTree.root)}`);
 
 

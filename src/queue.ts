@@ -12,18 +12,18 @@ class Queue<T>{
   }
 
   public pop() {
-    const head = this.list.getHead;
+    const head = this.list.head;
 
     if (head) {
       const value = head.value;
 
       if (head.next) {
         head.next.prev = null;
-        this.list.setHead = head.next;
+        this.list.head = head.next;
         return value;
       }
 
-      this.list.setHead = null;
+      this.list.head = null;
       return value;
     }
   }

@@ -1,42 +1,16 @@
-interface INode<K, V> {
+import { networkInterfaces } from "os";
+
+export interface INode<K, V> {
   data: {key: K, value: V};
   left : INode<K, V> | null;
   right : INode<K, V> | null;
 }
 
-export abstract class SearchAlgorythm<K, V> {
-  abstract search(key: K, node: INode<K, V> | null) : V | null;
+export interface SearchAlgorithm<K, V> {
+  search(key: K, node: INode<K, V> | null) : V | null;
 }
 
-export class PreOrderSearch<K, V> implements SearchAlgorythm<K, V> {
-  public search(key: K, node: INode<K, V> | null) : V | null {
-    if (node == null) return null;
-    
-    if (node.data.key === key) {
-      return node.data.value;
-    }
-
-    const leftNode : V | null = this.search(key, node.left);
-    const rightNode : V | null = this.search(key, node.right);
-    return leftNode || rightNode;
-  }
-}
-
-export class InOrderSearch<K, V> implements SearchAlgorythm<K, V> {
-  public search(key: K, node: INode<K, V> | null) : V | null {
-    if (node == null) return null;
-    const leftNode : V | null = this.search(key, node.left);
-
-    if (node.data.key === key) {
-      return node.data.value;
-    }
-
-    const rightNode : V | null = this.search(key, node.right);
-    return leftNode || rightNode;
-  }
-}
-
-export class PostOrderSearch<K, V> implements SearchAlgorythm<K, V> {
+export class PostOrderSearch<K, V> implements SearchAlgorithm<K, V> {
   public search(key: K, node: INode<K, V> | null) : V | null {
     if (node == null) return null;
     const leftNode : V | null = this.search(key, node.left);
@@ -50,17 +24,31 @@ export class PostOrderSearch<K, V> implements SearchAlgorythm<K, V> {
   }
 }
 
+class DefaultSearch<K, V> implements SearchAlgorithm<K, V> {
+  public search(key: K, node: INode<K, V> | null) : V | null {
+    if (node == null) return null;
 
+    if (node.data.key > key) {
+      return this.search(key, node.left);
+    } else if (node.data.key < key) {
+      return this.search(key, node.right);
+    } else {
+      return node.data.value;
+    }
+
+  }
+}
 
 export class BinaryTree<K, V> {
   public root : INode<K, V> | null;
-  private searchAlgorythm? : SearchAlgorythm<K, V>;
+  private searchAlgorythm? : SearchAlgorithm<K, V>;
 
   constructor() {
     this.root = null;
+    this.searchAlgorythm = new DefaultSearch<K, V>();
   }
 
-  set getAlgorythm(searchAlgorythm: SearchAlgorythm<K, V>) {
+  set getAlgorythm(searchAlgorythm: SearchAlgorithm<K, V>) {
     this.searchAlgorythm = searchAlgorythm;
   }
 
@@ -75,17 +63,21 @@ export class BinaryTree<K, V> {
 
   private insertNode(node: INode<K, V>, newNode: INode<K, V>) 
   {
-    if(!node.left) {
-      node.left = newNode;
-      return;
+    if(node.data.key > newNode.data.key) {
+      if(!node.left) {
+        node.left = newNode;
+      } else {
+        this.insertNode(node.left, newNode);
+      }
     }
 
-    if(!node.right) {
-      node.right = newNode;
-      return;
+    if(node.data.key < newNode.data.key) {
+      if(!node.right) {
+        node.right = newNode;
+      } else {
+        this.insertNode(node.right, newNode);
+      }
     }
-
-    this.insertNode(node.left, newNode);
   }
 
   public search(key: K, node: INode<K, V> | null) {
@@ -97,4 +89,3 @@ export class BinaryTree<K, V> {
   }
 }
 
-export default { BinaryTree, PreOrderSearch, InOrderSearch, PostOrderSearch, SearchAlgorythm };

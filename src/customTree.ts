@@ -3,7 +3,7 @@ interface INode<T> {
   children : INode<T>[];
 }
 
-export class CustomTree<T> {
+export class CustomLeavesAmountTree<T> {
   public root : INode<T> | null;
   private childrenAmount : number;
 
@@ -12,7 +12,7 @@ export class CustomTree<T> {
     this.childrenAmount = childrenAmount;
   }
 
-  public insert (value : T) {
+  public insert(value : T) {
     const newNode = { data: value, children: []};
 
     if (this.root === null) {
@@ -24,7 +24,6 @@ export class CustomTree<T> {
   }
 
   public insertNode(node: INode<T>, newNode : INode<T>) {
-
     if (node.children.length < this.childrenAmount) {
       node.children.push(newNode);
       return true;
@@ -32,7 +31,7 @@ export class CustomTree<T> {
 
     for(let index = 0; index < node.children.length; index += 1){
       if (this.insertNode(node.children[index], newNode)) {
-        return;
+        return true;
       }
     }
 
@@ -59,4 +58,4 @@ export class CustomTree<T> {
   }
 }
 
-export default CustomTree;
+export default CustomLeavesAmountTree;
