@@ -3,7 +3,6 @@ import Stack from './stack';
 import Queue from './queue';
 import CustomTree from './customTree';
 import BTree from './binaryTreeStrategy';
-import { basename } from 'path';
 
 console.log(`---------- LIST -----------`);
 
