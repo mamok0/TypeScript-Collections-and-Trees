@@ -32,15 +32,16 @@ export class BinaryTree<K, V> {
     this.searchAlgorithm = new BinarySearch<K, V>();
   }
 
-  set getAlgorythm(searchAlgorythm: ISearchAlgorithm<K, V>) {
+  set setAlgorythm(searchAlgorythm: ISearchAlgorithm<K, V>) {
     this.searchAlgorithm = searchAlgorythm;
   }
 
-  public insert(kayValue: { key: K, value: V }) {
-    var newNode = { data: kayValue, left: null, right: null }; 
+  public insert(keyValue: { key: K, value: V }) {
+    var newNode = { data: keyValue, left: null, right: null }; 
 
-    if(this.root === null) 
-      this.root = newNode; 
+    if(this.root === null) {
+      this.root = newNode;
+    }
     else {
       this.insertNode(this.root, newNode);
     }

@@ -19,20 +19,20 @@ console.log(`---------- STACK -----------`);
 const stack = new Stack();
 stack.push(1);
 stack.push(2);
-console.log(`length: ${stack.length}`);
+console.log(`length: ${stack.length()}`);
 stack.pop();
 console.log(`POP`);
-console.log(`length: ${stack.length}`);
+console.log(`length: ${stack.length()}`);
 
 console.log(`---------- QUEUE -----------`);
 
 const queue = new Queue();
 queue.push(1);
 queue.push(2);
-console.log(`length: ${queue.length}`);
+console.log(`length: ${queue.length()}`);
 queue.pop();
 console.log(`POP`);
-console.log(`length: ${queue.length}`);
+console.log(`length: ${queue.length()}`);
 
 
 console.log(`---------- CUSTOM TREE -----------`);
@@ -43,7 +43,12 @@ customTree.insert(2);
 customTree.insert(3);
 customTree.insert(4);
 customTree.insert(5);
+customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
 console.log(customTree.contains(3));
+console.dir(customTree);
 
 console.log(`---------- BINARY TREE -----------`);
 

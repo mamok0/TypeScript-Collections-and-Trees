@@ -15,28 +15,11 @@ export class LinkedList<T> {
     if (values) {
       values.forEach(v => {
         this.append(v);
-        this.length += 1;
       });
     }
     
     return this;
 };
-
-  get tail() : INode<T> | null | undefined {
-      return this._tail;
-  }
-
-  set tail(node: INode<T> | null | undefined) {
-    this._tail = node;
-  }
-
-  get head() : INode<T> | null | undefined {
-    return this._head;
-}
-  set head(node: INode<T> | null | undefined) {
-    this._head = node;
-  }
-
 
   public append(value: T): LinkedList<T> {
       const node = this.createNode(value);
@@ -55,6 +38,59 @@ export class LinkedList<T> {
       this.length += 1;
       return this;
   };
+
+  public prepend(value: T) {
+    const node = this.createNode(value);
+
+    if (this.isEmpty()) {
+      this._head = node;
+      this._tail = node;
+      return this;
+    }
+
+    if (this._head) {
+      this._head.prev = node;
+      node.next = this._head;
+      this._head = node;
+    }
+    this.length += 1;
+    return this;
+  }
+
+  public deleteFirst() {
+    const head = this._head;
+
+    if (head) {
+      const value = head.value;
+
+      if (head.next) {
+        head.next.prev = null;
+        this._head = head.next;
+        this.length -= 1;
+        return value;
+      }
+
+      this._head = null;
+      return value;
+    }
+  }
+
+  public deleteLast() {
+    const tail = this._tail;
+
+    if (tail) {
+      const node = tail.prev;
+
+      if(node) {
+        node.next = null;
+        this._tail = node;
+        this.length -= 1;
+        return node.value;
+      }
+    }
+    alert('array is empty');
+    return null;
+  }
   
   public isEmpty = () => !this._head;
   

@@ -26,12 +26,16 @@ export class CustomLeavesAmountTree<T> {
   public insertNode(node: INode<T>, newNode : INode<T>) {
     if (node.children.length < this.childrenAmount) {
       node.children.push(newNode);
-      return;
+      return node;
     }
-
+    console.log('a');
     for(let index = 0; index < node.children.length; index += 1){
-      this.insertNode(node.children[index], newNode);
+      const val = this.insertNode(node.children[index], newNode);
+      if (val) {
+        break;
+      }
     }
+    return null;
   }
 
   public contains(searchValue: T, node: INode<T> | null = this.root) {
