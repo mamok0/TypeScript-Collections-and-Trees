@@ -8,7 +8,7 @@ class Stack<T>{
   }
 
   public length() {
-    return this.length;
+    return this.list.length();
   }
 
   public pop() {

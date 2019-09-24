@@ -1,14 +1,30 @@
+import { networkInterfaces } from "os";
+
 export interface INode<K, V> {
   data: {key: K, value: V};
   left : INode<K, V> | null;
   right : INode<K, V> | null;
 }
 
-export interface ISearchAlgorithm<K, V> {
+export interface SearchAlgorithm<K, V> {
   search(key: K, node: INode<K, V> | null) : V | null;
 }
 
-class BinarySearch<K, V> implements ISearchAlgorithm<K, V> {
+export class PostOrderSearch<K, V> implements SearchAlgorithm<K, V> {
+  public search(key: K, node: INode<K, V> | null) : V | null {
+    if (node == null) return null;
+    const leftNode : V | null = this.search(key, node.left);
+    const rightNode : V | null = this.search(key, node.right);
+
+    if (node.data.key === key) {
+      return node.data.value;
+    }
+
+    return leftNode || rightNode;
+  }
+}
+
+class DefaultSearch<K, V> implements SearchAlgorithm<K, V> {
   public search(key: K, node: INode<K, V> | null) : V | null {
     if (node == null) return null;
 
@@ -25,15 +41,15 @@ class BinarySearch<K, V> implements ISearchAlgorithm<K, V> {
 
 export class BinaryTree<K, V> {
   public root : INode<K, V> | null;
-  private searchAlgorithm : ISearchAlgorithm<K, V>;
+  private searchAlgorythm? : SearchAlgorithm<K, V>;
 
   constructor() {
     this.root = null;
-    this.searchAlgorithm = new BinarySearch<K, V>();
+    this.searchAlgorythm = new DefaultSearch<K, V>();
   }
 
-  set getAlgorythm(searchAlgorythm: ISearchAlgorithm<K, V>) {
-    this.searchAlgorithm = searchAlgorythm;
+  set getAlgorythm(searchAlgorythm: SearchAlgorithm<K, V>) {
+    this.searchAlgorythm = searchAlgorythm;
   }
 
   public insert(kayValue: { key: K, value: V }) {
@@ -41,9 +57,8 @@ export class BinaryTree<K, V> {
 
     if(this.root === null) 
       this.root = newNode; 
-    else {
-      this.insertNode(this.root, newNode);
-    }
+    else
+      this.insertNode(this.root, newNode); 
   }
 
   private insertNode(node: INode<K, V>, newNode: INode<K, V>) 
@@ -65,8 +80,12 @@ export class BinaryTree<K, V> {
     }
   }
 
-  public search(key: K, node: INode<K, V> | null = this.root) {
-    return this.searchAlgorithm.search(key, node);
+  public search(key: K, node: INode<K, V> | null) {
+     if (this.searchAlgorythm) {
+      return this.searchAlgorythm.search(key, node);
+     }
+     console.log('no chosen algoruthm');
+     return null;
   }
 }
 
