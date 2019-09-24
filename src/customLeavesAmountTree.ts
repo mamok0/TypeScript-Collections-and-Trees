@@ -26,18 +26,15 @@ export class CustomLeavesAmountTree<T> {
   public insertNode(node: INode<T>, newNode : INode<T>) {
     if (node.children.length < this.childrenAmount) {
       node.children.push(newNode);
-      return true;
+      return;
     }
 
     for(let index = 0; index < node.children.length; index += 1){
-      if (this.insertNode(node.children[index], newNode)) {
-        return true;
-      }
+      this.insertNode(node.children[index], newNode);
     }
-
   }
 
-  public inOrderSearch(searchValue: T, node: INode<T> | null) {
+  public contains(searchValue: T, node: INode<T> | null = this.root) {
     if (node == null) return null;
     console.log(node.data);
     if (node.data === searchValue) {
@@ -47,7 +44,7 @@ export class CustomLeavesAmountTree<T> {
     let isFound = false;
     if (node.children) {
       node.children.forEach(childNode => {
-        if(this.inOrderSearch(searchValue, childNode)) {
+        if(this.contains(searchValue, childNode)) {
 
           isFound = true;
         }

@@ -8,10 +8,15 @@ interface INode<T> {
 export class LinkedList<T> {
   private _head: INode<T> | null | undefined;
   private _tail: INode<T> | null | undefined;
+  length : number;
 
   constructor(values?: T[]) {
+    this.length = 0;
     if (values) {
-      values.forEach(v => this.append(v));
+      values.forEach(v => {
+        this.append(v);
+        this.length += 1;
+      });
     }
     
     return this;
@@ -33,7 +38,7 @@ export class LinkedList<T> {
   }
 
 
-  public append = (value: T): LinkedList<T> => {
+  public append(value: T): LinkedList<T> {
       const node = this.createNode(value);
 
       if (this.isEmpty()) {
@@ -47,7 +52,7 @@ export class LinkedList<T> {
         node.prev = this._tail;
         this._tail = node;
       }
-
+      this.length += 1;
       return this;
   };
   
@@ -62,16 +67,6 @@ export class LinkedList<T> {
       }
       return result;
   };
-
-  public length() {
-    let count = 0;
-    let node = this._head;
-    while (node) {
-        node = node.next;
-        count += 1;
-    }
-    return count;
-  }
 
   private createNode = (value: T): INode<T> => {
       return { value };
