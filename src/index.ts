@@ -47,6 +47,12 @@ customTree.insert(10);
 customTree.insert(10);
 customTree.insert(10);
 customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
+customTree.insert(10);
+
 console.log(customTree.contains(3));
 console.dir(customTree);
 

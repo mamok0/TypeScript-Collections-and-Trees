@@ -23,19 +23,24 @@ export class CustomLeavesAmountTree<T> {
     this.insertNode(this.root, newNode);
   }
 
-  public insertNode(node: INode<T>, newNode : INode<T>) {
-    if (node.children.length < this.childrenAmount) {
+  public IsNodeFull (node: INode<T>) {
+    return node.children.length === this.childrenAmount;
+  }
+
+
+  public insertNode(node: INode<T>, newNode : INode<T>) : T {
+    if (!this.IsNodeFull(node)) {
       node.children.push(newNode);
-      return node;
+      return newNode.data;
     }
-    console.log('a');
+
     for(let index = 0; index < node.children.length; index += 1){
-      const val = this.insertNode(node.children[index], newNode);
-      if (val) {
-        break;
+      if (!this.IsNodeFull(node.children[index])) {
+        node.children[index].children.push(newNode);
+        return node.children[index].data;
       }
     }
-    return null;
+    return this.insertNode(node.children[0], newNode);
   }
 
   public contains(searchValue: T, node: INode<T> | null = this.root) {
