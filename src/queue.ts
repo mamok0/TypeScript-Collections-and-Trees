@@ -4,7 +4,7 @@ class Queue<T>{
   private list = new List.LinkedList<T>([]);
 
   public length() {
-    return this.list.length();
+    return this.length;
   }
 
   public push(value: T) {

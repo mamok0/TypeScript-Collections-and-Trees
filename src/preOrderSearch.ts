@@ -1,6 +1,6 @@
 import * as Search from './binaryTreeStrategy';
 
-export class PreOrderSearch<K, V> implements Search.SearchAlgorithm<K, V> {
+export class PreOrderSearch<K, V> implements Search.ISearchAlgorithm<K, V> {
   public search(key: K, node: Search.INode<K, V> | null) : V | null {
     if (node == null) return null;
 
