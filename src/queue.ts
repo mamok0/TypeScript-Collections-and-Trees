@@ -14,7 +14,6 @@ class Queue<T>{
   public pop() {
     this.list.deleteFirst();
   }
-
 }
 
 export default Queue;

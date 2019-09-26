@@ -81,7 +81,7 @@ export class LinkedList<T> {
     if (tail) {
       const node = tail.prev;
 
-      if(node) {
+      if (node) {
         node.next = null;
         this._tail = node;
         this.length -= 1;
@@ -94,17 +94,19 @@ export class LinkedList<T> {
   
   public isEmpty = () => !this._head;
   
-  public toArray = (): T[] => {
+  public toArray(): T[] {
       const result: T[] = [];
       let node = this._head;
+
       while (node) {
           result.push(node.value);
           node = node.next;
       }
+
       return result;
   };
 
-  private createNode = (value: T): INode<T> => {
+  private createNode(value: T): INode<T> {
       return { value };
   };
 }

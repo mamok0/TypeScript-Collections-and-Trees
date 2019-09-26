@@ -19,7 +19,6 @@ class BinarySearch<K, V> implements ISearchAlgorithm<K, V> {
     } else {
       return node.data.value;
     }
-
   }
 }
 
@@ -32,42 +31,42 @@ export class BinaryTree<K, V> {
     this.searchAlgorithm = new BinarySearch<K, V>();
   }
 
-  set setAlgorythm(searchAlgorythm: ISearchAlgorithm<K, V>) {
-    this.searchAlgorithm = searchAlgorythm;
+  set algorithm(searchAlgorithm: ISearchAlgorithm<K, V>) {
+    this.searchAlgorithm = searchAlgorithm;
   }
 
   public insert(keyValue: { key: K, value: V }) {
     var newNode = { data: keyValue, left: null, right: null }; 
 
-    if(this.root === null) {
+    if (this.root === null) {
       this.root = newNode;
-    }
-    else {
+    } else {
       this.insertNode(this.root, newNode);
     }
   }
 
+  public search(key: K) {
+    return this.searchAlgorithm.search(key, this.root);
+  }
+
+
   private insertNode(node: INode<K, V>, newNode: INode<K, V>) 
   {
-    if(node.data.key > newNode.data.key) {
-      if(!node.left) {
+    if (node.data.key > newNode.data.key) {
+      if (!node.left) {
         node.left = newNode;
       } else {
         this.insertNode(node.left, newNode);
       }
     }
 
-    if(node.data.key < newNode.data.key) {
-      if(!node.right) {
+    if (node.data.key < newNode.data.key) {
+      if (!node.right) {
         node.right = newNode;
       } else {
         this.insertNode(node.right, newNode);
       }
     }
-  }
-
-  public search(key: K, node: INode<K, V> | null = this.root) {
-    return this.searchAlgorithm.search(key, node);
   }
 }
 
