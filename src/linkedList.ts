@@ -8,7 +8,7 @@ interface INode<T> {
 export class LinkedList<T> {
   private _head: INode<T> | null | undefined;
   private _tail: INode<T> | null | undefined;
-  length : number;
+  length: number;
 
   constructor(values?: T[]) {
     this.length = 0;
@@ -19,7 +19,7 @@ export class LinkedList<T> {
     }
     
     return this;
-};
+  }
 
   public append(value: T): LinkedList<T> {
       const node = this.createNode(value);
@@ -37,15 +37,14 @@ export class LinkedList<T> {
       }
       this.length += 1;
       return this;
-  };
+  }
 
-  public prepend(value: T) {
+  public prepend(value: T): void {
     const node = this.createNode(value);
 
     if (this.isEmpty()) {
       this._head = node;
       this._tail = node;
-      return this;
     }
 
     if (this._head) {
@@ -54,10 +53,9 @@ export class LinkedList<T> {
       this._head = node;
     }
     this.length += 1;
-    return this;
   }
 
-  public deleteFirst() {
+  public deleteFirst(): T | undefined {
     const head = this._head;
 
     if (head) {
@@ -75,7 +73,7 @@ export class LinkedList<T> {
     }
   }
 
-  public deleteLast() {
+  public deleteLast(): T | undefined | null {
     const tail = this._tail;
 
     if (tail) {
@@ -92,7 +90,7 @@ export class LinkedList<T> {
     return null;
   }
   
-  public isEmpty = () => !this._head;
+  public isEmpty = (): boolean => !this._head;
   
   public toArray(): T[] {
       const result: T[] = [];
@@ -104,11 +102,11 @@ export class LinkedList<T> {
       }
 
       return result;
-  };
+  }
 
   private createNode(value: T): INode<T> {
       return { value };
-  };
+  }
 }
 
 export default LinkedList;
