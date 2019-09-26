@@ -3,15 +3,15 @@ import * as List from './linkedList';
 class Queue<T>{
   private list = new List.LinkedList<T>();
 
-  public length() {
+  get length(): number {
     return this.list.length;
   }
 
-  public push(value: T) {
+  public push(value: T): void {
     this.list.prepend(value);
   }
 
-  public pop() {
+  public pop(): void {
     this.list.deleteFirst();
   }
 }

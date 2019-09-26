@@ -3,15 +3,15 @@ import * as List from './linkedList';
 class Stack<T>{
   private list = new List.LinkedList<T>();
 
-  public push(value: T) {
+  public push(value: T): void {
     this.list.append(value);
   }
 
-  public length() {
+  get length(): number {
     return this.list.length;
   }
 
-  public pop() {
+  public pop(): void {
     this.list.deleteLast();
   }
 }

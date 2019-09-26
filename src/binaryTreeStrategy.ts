@@ -1,15 +1,15 @@
 export interface INode<K, V> {
-  data: {key: K, value: V};
-  left : INode<K, V> | null;
-  right : INode<K, V> | null;
+  data: {key: K; value: V};
+  left: INode<K, V> | null;
+  right: INode<K, V> | null;
 }
 
 export interface ISearchAlgorithm<K, V> {
-  search(key: K, node: INode<K, V> | null) : V | null;
+  search(key: K, node: INode<K, V> | null): V | null;
 }
 
 class BinarySearch<K, V> implements ISearchAlgorithm<K, V> {
-  public search(key: K, node: INode<K, V> | null) : V | null {
+  public search(key: K, node: INode<K, V> | null): V | null {
     if (node == null) return null;
 
     if (node.data.key > key) {
@@ -23,8 +23,8 @@ class BinarySearch<K, V> implements ISearchAlgorithm<K, V> {
 }
 
 export class BinaryTree<K, V> {
-  public root : INode<K, V> | null;
-  private searchAlgorithm : ISearchAlgorithm<K, V>;
+  public root: INode<K, V> | null;
+  private searchAlgorithm: ISearchAlgorithm<K, V>;
 
   constructor() {
     this.root = null;
@@ -35,8 +35,8 @@ export class BinaryTree<K, V> {
     this.searchAlgorithm = searchAlgorithm;
   }
 
-  public insert(keyValue: { key: K, value: V }) {
-    var newNode = { data: keyValue, left: null, right: null }; 
+  public insert(keyValue: { key: K; value: V }): void {
+    const newNode = { data: keyValue, left: null, right: null }; 
 
     if (this.root === null) {
       this.root = newNode;
@@ -45,12 +45,12 @@ export class BinaryTree<K, V> {
     }
   }
 
-  public search(key: K) {
+  public search(key: K): V | null {
     return this.searchAlgorithm.search(key, this.root);
   }
 
 
-  private insertNode(node: INode<K, V>, newNode: INode<K, V>) 
+  private insertNode(node: INode<K, V>, newNode: INode<K, V>): void
   {
     if (node.data.key > newNode.data.key) {
       if (!node.left) {

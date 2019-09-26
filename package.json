@@ -25,9 +25,7 @@
     "webpack": "^4.40.2",
     "webpack-cli": "^3.3.9",
     "webpack-dev-server": "^3.8.1",
-    "write-file-webpack-plugin": "^4.5.1"
-  },
-  "dependencies": {
+    "write-file-webpack-plugin": "^4.5.1",
     "tslint-to-eslint-config": "^0.2.6"
   }
 }
