@@ -58,11 +58,7 @@ export class CustomLeavesAmountTree<T> {
   public isPerfectNode (node: INode<T>): boolean {
 
     const isPerfect = node.children.every((childNode) => {
-      if (this.isPerfectNode(childNode)) {
-        return true;
-      } else {
-        return false;
-      }
+      return this.isPerfectNode(childNode);
     });
 
     if (this.isNodeFull(node)) {
