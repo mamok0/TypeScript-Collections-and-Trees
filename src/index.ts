@@ -19,20 +19,20 @@ console.log(`---------- STACK -----------`);
 const stack = new Stack();
 stack.push(1);
 stack.push(2);
-console.log(`length: ${stack.length}`);
+console.log(`length: ${stack.length()}`);
 stack.pop();
 console.log(`POP`);
-console.log(`length: ${stack.length}`);
+console.log(`length: ${stack.length()}`);
 
 console.log(`---------- QUEUE -----------`);
 
 const queue = new Queue();
 queue.push(1);
 queue.push(2);
-console.log(`length: ${queue.length}`);
+console.log(`length: ${queue.length()}`);
 queue.pop();
 console.log(`POP`);
-console.log(`length: ${queue.length}`);
+console.log(`length: ${queue.length()}`);
 
 
 console.log(`---------- CUSTOM TREE -----------`);
@@ -43,7 +43,30 @@ customTree.insert(2);
 customTree.insert(3);
 customTree.insert(4);
 customTree.insert(5);
-console.log(customTree.contains(3));
+customTree.insert(6);
+customTree.insert(7);
+customTree.insert(8);
+customTree.insert(9);
+customTree.insert(10);
+customTree.insert(11);
+customTree.insert(12);
+customTree.insert(13);
+customTree.insert(14);
+customTree.insert(15);
+customTree.insert(16);
+customTree.insert(17);
+customTree.insert(18);
+customTree.insert(19);
+customTree.insert(20);
+customTree.insert(21);
+customTree.insert(22);
+customTree.insert(23);
+customTree.insert(24);
+customTree.insert(25);
+customTree.insert(26);
+
+console.log(customTree.contains(23));
+console.dir(customTree);
 
 console.log(`---------- BINARY TREE -----------`);
 
@@ -55,7 +78,7 @@ binaryTree.insert({key: 'c', value: 3});
 binaryTree.insert({key: 'd', value: 4});
 binaryTree.insert({key: 'e', value: 5});
 
-console.log(`preOrder: b = ${binaryTree.search('b')}`);
+console.log(`binarySearch: b = ${binaryTree.search('b')}`);
 
 
 
